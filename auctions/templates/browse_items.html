@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Browse Items</h2>
+  <ul>
+    {% for item in items %}
+      <li>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+        <p>Starting Price: ${{ item.starting_bid }}</p>
+        <p>Highest Bid: ${{ item.highest_bid }}</p>
+        <img src="{{ item.image.url }}" alt="{{ item.title }} Image" height="100">
+        {% if item.auction_status == 'open' %}
+
+        <form method="post" action="{% url 'auctions:place_bid' item.id %}">
+          {% csrf_token %}
+          {{ bid_form.as_hidden }}
+          <input type="number" step="0.01" name="amount" placeholder="Enter your bid" required>
+          <button type="submit">Place Bid</button>
+        </form>
+        {% else %}
+        Bidding done
+        {% endif %}
+
+        
+        {% if user.is_authenticated %}
+         
+        {% else %}
+          <p><a href="{% url 'accounts:login' %}">Log in</a> to place a bid.</p>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

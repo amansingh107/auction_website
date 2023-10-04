@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>List an Item for Auction</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">List Item</button>
+      <a href="{% url 'logout'%}">Logout</a>
+      <a href="{% url 'auctions:browse_items'%}">See listed items</a>
+      <a href="{% url 'auctions:user_dashboard'%}">User Dashboard</a>
+    </form>
+</body>
+</html>

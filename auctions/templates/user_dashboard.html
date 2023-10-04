@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Your Dashboard</h2>
+    <ul>
+        <h3>Your Listed Items:</h3>
+        {% for item in user_items %}
+        <li>
+            {{ item.title }} - <a href="{% url 'auctions:edit_item' item.id %}">Manage Item</a>
+          
+      
+        </li>
+        {% endfor %}
+    </ul>
+
+    
+</body>
+</html>
